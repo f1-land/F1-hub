@@ -3,282 +3,735 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saksham F1 Hub</title>
+  <title>F1 Hub</title>
   <style>
+    :root {
+      --bg: #07090d;
+      --panel: #11151d;
+      --panel-2: #171d27;
+      --line: #272f3d;
+      --text: #f5f7fb;
+      --muted: #b8c0cf;
+      --red: #e10600;
+      --red-2: #ff3b30;
+      --white: #ffffff;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
-      background: #0b0f19;
-      color: #ffffff;
-      line-height: 1.6;
+      background:
+        radial-gradient(circle at top right, rgba(225, 6, 0, 0.22), transparent 25%),
+        linear-gradient(180deg, #06080d 0%, #0a0e14 45%, #090b10 100%);
+      color: var(--text);
+      line-height: 1.5;
     }
 
-    header {
-      background: linear-gradient(135deg, #e10600, #8b0000);
-      padding: 20px;
-      text-align: center;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 24px));
+      margin: auto;
+    }
+
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 10;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(8, 10, 15, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    header h1 {
-      font-size: 2rem;
-      letter-spacing: 1px;
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      font-size: 1.15rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), #8e0000);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      font-size: 1.15rem;
     }
 
     nav {
-      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
     }
 
     nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 10px;
+      color: var(--muted);
+      font-weight: 700;
       font-size: 0.95rem;
-      font-weight: bold;
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: 0.25s;
+    }
+
+    nav a:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.06);
     }
 
     .hero {
-      padding: 50px 20px;
-      text-align: center;
-      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80') center/cover;
-      position: relative;
+      padding: 34px 0 22px;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .hero h2 {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-      color: #ff4d4d;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: #e10600;
-      color: white;
-      padding: 12px 22px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #ff2b2b;
-    }
-
-    section {
-      padding: 35px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      color: #ff4d4d;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .cards {
+    .hero-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: 1.3fr 0.9fr;
       gap: 20px;
     }
 
-    .card {
-      background: #161c2b;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-      transition: transform 0.25s ease;
+    .hero-main,
+    .hero-side,
+    .panel {
+      background: linear-gradient(180deg, rgba(22, 27, 36, 0.95), rgba(14, 18, 25, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
-    .card:hover {
-      transform: translateY(-6px);
+    .hero-main {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
     }
 
-    .card h3 {
-      color: #ffffff;
-      margin-bottom: 10px;
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -50px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(225, 6, 0, 0.35), transparent 70%);
     }
 
-    .card p {
-      color: #c7cbd6;
-      font-size: 0.95rem;
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(225, 6, 0, 0.15);
+      color: #ffd0cd;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
-    .schedule-box {
-      background: #161c2b;
-      padding: 24px;
-      border-radius: 16px;
-      text-align: center;
+    .hero-main h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.02;
+      max-width: 680px;
+      margin-bottom: 12px;
     }
 
-    .schedule-box p {
-      margin: 8px 0;
-      color: #d4d8e2;
+    .hero-main p {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 22px;
     }
 
-    .highlight {
-      color: #ff4d4d;
-      font-weight: bold;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
     }
 
-    .blog-list {
+    .btn,
+    .btn-outline {
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      color: white;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: white;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .stat-row {
       display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.45rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      justify-content: space-between;
+    }
+
+    .mini-label {
+      color: #ffbeb9;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.55px;
+      font-weight: 800;
+    }
+
+    .next-race-title {
+      font-size: 1.65rem;
+      margin: 8px 0 10px;
+    }
+
+    .hero-side p,
+    .small-text {
+      color: var(--muted);
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .count-item {
+      background: var(--panel-2);
+      border-radius: 14px;
+      padding: 14px 8px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .count-item strong {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    section {
+      padding: 10px 0 20px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      font-size: 1.55rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 480px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 14px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.96rem;
+    }
+
+    th {
+      color: #ffd6d3;
+      background: rgba(225, 6, 0, 0.1);
+      font-size: 0.84rem;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    tr:hover td {
+      background: rgba(255,255,255,0.03);
+    }
+
+    .calendar-grid,
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
     }
 
-    .blog-post {
-      background: #161c2b;
+    .race-card,
+    .info-card {
+      background: linear-gradient(180deg, rgba(23,29,39,0.96), rgba(14,18,25,0.96));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
       padding: 18px;
-      border-left: 5px solid #e10600;
-      border-radius: 12px;
+      box-shadow: var(--shadow);
     }
 
-    .blog-post h4 {
+    .race-card .round {
+      color: #ffbeb9;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .race-card h3,
+    .info-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .race-card p,
+    .info-card p,
+    .note,
+    .footer-note {
+      color: var(--muted);
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.85rem;
+      color: #e7ebf5;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .blog {
+      background: linear-gradient(180deg, rgba(23,29,39,0.96), rgba(14,18,25,0.96));
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+    }
+
+    .blog span {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: #ffbeb9;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .blog h3 {
       margin-bottom: 8px;
     }
 
     .contact {
       text-align: center;
-      background: #111625;
-      border-radius: 16px;
-      padding: 25px;
+      padding: 26px;
     }
 
     footer {
+      padding: 30px 0 38px;
       text-align: center;
-      padding: 18px;
-      color: #b7bcc9;
-      background: #090d15;
-      margin-top: 30px;
+      color: var(--muted);
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.6rem;
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .hero h2 {
-        font-size: 1.7rem;
+      nav {
+        justify-content: flex-start;
       }
 
-      nav a {
-        display: inline-block;
-        margin: 5px 8px;
+      .hero-main,
+      .hero-side,
+      .panel {
+        padding: 18px;
+      }
+
+      .stat-row,
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🏎️ Saksham F1 Hub</h1>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#drivers">Drivers</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">🏎️</div>
+        <div>F1 Hub</div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#next-race">Next Race</a>
+        <a href="#standings">Standings</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#lineup">Line-up</a>
+        <a href="#blog">Blog</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h2>Formula 1 Fan Website</h2>
-      <p>Your own F1 fan page for race weekends, driver talk, predictions, and updates.</p>
-      <a class="btn" href="#schedule">See Race Section</a>
-    </div>
-  </section>
+  <main class="container">
+    <section class="hero" id="home">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div class="kicker">2026 Season • Fan-made F1 Hub</div>
+          <h1>F1 Hub</h1>
+          <p>
+            A pro-style Formula 1 fan website with the 2026 race calendar, current driver and team standings,
+            next race details, and a team line-up section. It is inspired by the clean feel of official motorsport sites,
+            but built as your own fan project.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#standings">View Standings</a>
+            <a class="btn-outline" href="#calendar">Full Calendar</a>
+          </div>
+          <div class="stat-row">
+            <div class="stat">
+              <strong>22</strong>
+              <span>Grand Prix weekends</span>
+            </div>
+            <div class="stat">
+              <strong>11</strong>
+              <span>Teams in 2026</span>
+            </div>
+            <div class="stat">
+              <strong>24</strong>
+              <span>Drivers on the grid</span>
+            </div>
+            <div class="stat">
+              <strong>2026</strong>
+              <span>Season in focus</span>
+            </div>
+          </div>
+        </div>
 
-  <section id="drivers">
-    <h2 class="section-title">Featured Driver Sections</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>🔥 Max Verstappen</h3>
-        <p>Add your thoughts, stats, and performance notes for Max here.</p>
-      </div>
-      <div class="card">
-        <h3>⚡ Lewis Hamilton</h3>
-        <p>Write race analysis, comeback stories, and your fan opinions.</p>
-      </div>
-      <div class="card">
-        <h3>🚀 Charles Leclerc</h3>
-        <p>Keep Ferrari updates, qualifying pace notes, and podium chances.</p>
-      </div>
-      <div class="card">
-        <h3>🌟 Your Favourite Driver</h3>
-        <p>Replace this card with your own favourite driver section.</p>
-      </div>
-    </div>
-  </section>
+        <aside class="hero-side" id="next-race">
+          <div>
+            <div class="mini-label">Next Race</div>
+            <h2 class="next-race-title">Miami Grand Prix 2026</h2>
+            <p>Round 4 • 01–03 May • Hard Rock Stadium, Miami</p>
+          </div>
 
-  <section id="schedule">
-    <h2 class="section-title">Race Weekend Area</h2>
-    <div class="schedule-box">
-      <p><span class="highlight">Next Grand Prix:</span> Add race name here</p>
-      <p><span class="highlight">Practice:</span> Add time here</p>
-      <p><span class="highlight">Qualifying:</span> Add time here</p>
-      <p><span class="highlight">Race:</span> Add time here</p>
-      <p>This section can be updated every race weekend from your phone.</p>
-    </div>
-  </section>
+          <div class="countdown" id="countdown">
+            <div class="count-item"><strong id="days">0</strong><span>Days</span></div>
+            <div class="count-item"><strong id="hours">0</strong><span>Hours</span></div>
+            <div class="count-item"><strong id="mins">0</strong><span>Mins</span></div>
+            <div class="count-item"><strong id="secs">0</strong><span>Secs</span></div>
+          </div>
 
-  <section id="blog">
-    <h2 class="section-title">F1 Blog Posts</h2>
-    <div class="blog-list">
-      <div class="blog-post">
-        <h4>Who will win this weekend?</h4>
-        <p>Write your prediction here and tell visitors what you think about the race.</p>
+          <div>
+            <p class="small-text">Weekend sessions</p>
+            <div class="chip-row">
+              <div class="chip">Practice 1 • 01 May</div>
+              <div class="chip">Sprint Qualifying • 01 May</div>
+              <div class="chip">Sprint • 02 May</div>
+              <div class="chip">Qualifying • 02 May</div>
+              <div class="chip">Race • 03 May</div>
+            </div>
+          </div>
+        </aside>
       </div>
-      <div class="blog-post">
-        <h4>Best overtake of the season</h4>
-        <p>Add your opinion article about the coolest overtake or battle.</p>
-      </div>
-      <div class="blog-post">
-        <h4>Ferrari, Red Bull, or Mercedes?</h4>
-        <p>Compare teams and add your own fan analysis.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact">
-    <h2 class="section-title">Contact</h2>
-    <div class="contact">
-      <p>Instagram: @yourusername</p>
-      <p>Email: yourmail@example.com</p>
-      <p>You can replace these with your real details later.</p>
-    </div>
-  </section>
+    <section id="standings">
+      <div class="section-head">
+        <div>
+          <h2>Current 2026 Standings</h2>
+          <p>Top driver and team positions shown here for the current stage of the season.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3 style="margin-bottom:12px;">Top Drivers</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Pos</th>
+                  <th>Driver</th>
+                  <th>Team</th>
+                  <th>Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Kimi Antonelli</td><td>Mercedes</td><td>72</td></tr>
+                <tr><td>2</td><td>George Russell</td><td>Mercedes</td><td>63</td></tr>
+                <tr><td>3</td><td>Charles Leclerc</td><td>Ferrari</td><td>49</td></tr>
+                <tr><td>4</td><td>Lewis Hamilton</td><td>Ferrari</td><td>41</td></tr>
+                <tr><td>5</td><td>Lando Norris</td><td>McLaren</td><td>25</td></tr>
+                <tr><td>6</td><td>Oscar Piastri</td><td>McLaren</td><td>21</td></tr>
+                <tr><td>7</td><td>Oliver Bearman</td><td>Haas F1 Team</td><td>17</td></tr>
+                <tr><td>8</td><td>Pierre Gasly</td><td>Alpine</td><td>15</td></tr>
+                <tr><td>9</td><td>Max Verstappen</td><td>Red Bull Racing</td><td>12</td></tr>
+                <tr><td>10</td><td>Liam Lawson</td><td>Racing Bulls</td><td>10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin-bottom:12px;">Teams Championship</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Pos</th>
+                  <th>Team</th>
+                  <th>Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Mercedes</td><td>135</td></tr>
+                <tr><td>2</td><td>Ferrari</td><td>90</td></tr>
+                <tr><td>3</td><td>McLaren</td><td>46</td></tr>
+                <tr><td>4</td><td>Haas F1 Team</td><td>18</td></tr>
+                <tr><td>5</td><td>Alpine</td><td>16</td></tr>
+                <tr><td>6</td><td>Racing Bulls</td><td>14</td></tr>
+                <tr><td>7</td><td>Red Bull Racing</td><td>16</td></tr>
+                <tr><td>8</td><td>Audi</td><td>2</td></tr>
+                <tr><td>9</td><td>Williams</td><td>2</td></tr>
+                <tr><td>10</td><td>Cadillac</td><td>0</td></tr>
+                <tr><td>11</td><td>Aston Martin</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calendar">
+      <div class="section-head">
+        <div>
+          <h2>2026 Grand Prix Calendar</h2>
+          <p>Use this section as your season map. You can later keep adding race notes after every weekend.</p>
+        </div>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="race-card"><div class="round">Round 1</div><h3>Australia</h3><p>06–08 Mar • Melbourne</p></div>
+        <div class="race-card"><div class="round">Round 2</div><h3>China</h3><p>13–15 Mar • Shanghai</p></div>
+        <div class="race-card"><div class="round">Round 3</div><h3>Japan</h3><p>27–29 Mar • Suzuka</p></div>
+        <div class="race-card"><div class="round">Round 4</div><h3>Miami</h3><p>01–03 May • Miami</p></div>
+        <div class="race-card"><div class="round">Round 5</div><h3>Canada</h3><p>22–24 May • Montreal</p></div>
+        <div class="race-card"><div class="round">Round 6</div><h3>Monaco</h3><p>05–07 Jun • Monaco</p></div>
+        <div class="race-card"><div class="round">Round 7</div><h3>Spain</h3><p>12–14 Jun • Barcelona-Catalunya</p></div>
+        <div class="race-card"><div class="round">Round 8</div><h3>Austria</h3><p>26–28 Jun • Spielberg</p></div>
+        <div class="race-card"><div class="round">Round 9</div><h3>Great Britain</h3><p>03–05 Jul • Silverstone</p></div>
+        <div class="race-card"><div class="round">Round 10</div><h3>Belgium</h3><p>17–19 Jul • Spa-Francorchamps</p></div>
+        <div class="race-card"><div class="round">Round 11</div><h3>Hungary</h3><p>24–26 Jul • Budapest</p></div>
+        <div class="race-card"><div class="round">Round 12</div><h3>Netherlands</h3><p>21–23 Aug • Zandvoort</p></div>
+        <div class="race-card"><div class="round">Round 13</div><h3>Italy</h3><p>04–06 Sep • Monza</p></div>
+        <div class="race-card"><div class="round">Round 14</div><h3>Spain</h3><p>11–13 Sep • Madrid</p></div>
+        <div class="race-card"><div class="round">Round 15</div><h3>Azerbaijan</h3><p>24–26 Sep • Baku</p></div>
+        <div class="race-card"><div class="round">Round 16</div><h3>Singapore</h3><p>09–11 Oct • Marina Bay</p></div>
+        <div class="race-card"><div class="round">Round 17</div><h3>United States</h3><p>23–25 Oct • Austin</p></div>
+        <div class="race-card"><div class="round">Round 18</div><h3>Mexico City</h3><p>30 Oct–01 Nov • Mexico City</p></div>
+        <div class="race-card"><div class="round">Round 19</div><h3>São Paulo</h3><p>06–08 Nov • Interlagos</p></div>
+        <div class="race-card"><div class="round">Round 20</div><h3>Las Vegas</h3><p>19–21 Nov • Las Vegas</p></div>
+        <div class="race-card"><div class="round">Round 21</div><h3>Qatar</h3><p>27–29 Nov • Lusail</p></div>
+        <div class="race-card"><div class="round">Round 22</div><h3>Abu Dhabi</h3><p>04–06 Dec • Yas Marina</p></div>
+      </div>
+    </section>
+
+    <section id="lineup">
+      <div class="section-head">
+        <div>
+          <h2>2026 Driver Line-up</h2>
+          <p>A clean team-by-team list so your website already feels complete.</p>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card"><h3>Mercedes</h3><p>George Russell • Kimi Antonelli</p></div>
+        <div class="info-card"><h3>Ferrari</h3><p>Charles Leclerc • Lewis Hamilton</p></div>
+        <div class="info-card"><h3>McLaren</h3><p>Lando Norris • Oscar Piastri</p></div>
+        <div class="info-card"><h3>Haas F1 Team</h3><p>Esteban Ocon • Oliver Bearman</p></div>
+        <div class="info-card"><h3>Alpine</h3><p>Pierre Gasly • Franco Colapinto</p></div>
+        <div class="info-card"><h3>Red Bull Racing</h3><p>Max Verstappen • Isack Hadjar</p></div>
+        <div class="info-card"><h3>Racing Bulls</h3><p>Liam Lawson • Arvid Lindblad</p></div>
+        <div class="info-card"><h3>Audi</h3><p>Nico Hulkenberg • Gabriel Bortoleto</p></div>
+        <div class="info-card"><h3>Williams</h3><p>Carlos Sainz • Alexander Albon</p></div>
+        <div class="info-card"><h3>Cadillac</h3><p>Sergio Perez • Valtteri Bottas</p></div>
+        <div class="info-card"><h3>Aston Martin</h3><p>Fernando Alonso • Lance Stroll</p></div>
+      </div>
+    </section>
+
+    <section id="blog">
+      <div class="section-head">
+        <div>
+          <h2>Race Notes & Prediction Zone</h2>
+          <p>These are editable sample posts. Later you can replace them with your own race reactions.</p>
+        </div>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog">
+          <span>Prediction</span>
+          <h3>Who wins Miami?</h3>
+          <p>Will Mercedes keep the momentum, or can Ferrari and McLaren hit back on a Sprint weekend?</p>
+        </article>
+        <article class="blog">
+          <span>Debate</span>
+          <h3>Antonelli vs Russell</h3>
+          <p>Mercedes already look strong. Can the intra-team title fight become the story of the year?</p>
+        </article>
+        <article class="blog">
+          <span>Fan Pick</span>
+          <h3>Best driver so far</h3>
+          <p>Use this section to post your own rankings after each Grand Prix weekend.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel contact">
+        <h2 style="margin-bottom:10px;">About This Website</h2>
+        <p class="note">
+          F1 Hub is a fan-made project built for learning web design on phone.
+          You can keep improving it by adding race reviews, image galleries, and a standings refresh later.
+        </p>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>Made by Saksham | F1 Fan Website</p>
+    <div class="container footer-note">F1 Hub • Fan-made F1 website</div>
   </footer>
+
+  <script>
+    const targetDate = new Date("2026-05-03T13:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("days").textContent = "0";
+        document.getElementById("hours").textContent = "0";
+        document.getElementById("mins").textContent = "0";
+        document.getElementById("secs").textContent = "0";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("mins").textContent = mins;
+      document.getElementById("secs").textContent = secs;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
