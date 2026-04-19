@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saksham F1 Hub</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0f19;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #e10600, #8b0000);
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      margin-top: 12px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 50px 20px;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80') center/cover;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      color: #ff4d4d;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #e10600;
+      color: white;
+      padding: 12px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff2b2b;
+    }
+
+    section {
+      padding: 35px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: #ff4d4d;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #161c2b;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      transition: transform 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #c7cbd6;
+      font-size: 0.95rem;
+    }
+
+    .schedule-box {
+      background: #161c2b;
+      padding: 24px;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .schedule-box p {
+      margin: 8px 0;
+      color: #d4d8e2;
+    }
+
+    .highlight {
+      color: #ff4d4d;
+      font-weight: bold;
+    }
+
+    .blog-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .blog-post {
+      background: #161c2b;
+      padding: 18px;
+      border-left: 5px solid #e10600;
+      border-radius: 12px;
+    }
+
+    .blog-post h4 {
+      margin-bottom: 8px;
+    }
+
+    .contact {
+      text-align: center;
+      background: #111625;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      color: #b7bcc9;
+      background: #090d15;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .hero h2 {
+        font-size: 1.7rem;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏎️ Saksham F1 Hub</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#drivers">Drivers</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h2>Formula 1 Fan Website</h2>
+      <p>Your own F1 fan page for race weekends, driver talk, predictions, and updates.</p>
+      <a class="btn" href="#schedule">See Race Section</a>
+    </div>
+  </section>
+
+  <section id="drivers">
+    <h2 class="section-title">Featured Driver Sections</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>🔥 Max Verstappen</h3>
+        <p>Add your thoughts, stats, and performance notes for Max here.</p>
+      </div>
+      <div class="card">
+        <h3>⚡ Lewis Hamilton</h3>
+        <p>Write race analysis, comeback stories, and your fan opinions.</p>
+      </div>
+      <div class="card">
+        <h3>🚀 Charles Leclerc</h3>
+        <p>Keep Ferrari updates, qualifying pace notes, and podium chances.</p>
+      </div>
+      <div class="card">
+        <h3>🌟 Your Favourite Driver</h3>
+        <p>Replace this card with your own favourite driver section.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2 class="section-title">Race Weekend Area</h2>
+    <div class="schedule-box">
+      <p><span class="highlight">Next Grand Prix:</span> Add race name here</p>
+      <p><span class="highlight">Practice:</span> Add time here</p>
+      <p><span class="highlight">Qualifying:</span> Add time here</p>
+      <p><span class="highlight">Race:</span> Add time here</p>
+      <p>This section can be updated every race weekend from your phone.</p>
+    </div>
+  </section>
+
+  <section id="blog">
+    <h2 class="section-title">F1 Blog Posts</h2>
+    <div class="blog-list">
+      <div class="blog-post">
+        <h4>Who will win this weekend?</h4>
+        <p>Write your prediction here and tell visitors what you think about the race.</p>
+      </div>
+      <div class="blog-post">
+        <h4>Best overtake of the season</h4>
+        <p>Add your opinion article about the coolest overtake or battle.</p>
+      </div>
+      <div class="blog-post">
+        <h4>Ferrari, Red Bull, or Mercedes?</h4>
+        <p>Compare teams and add your own fan analysis.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact">
+      <p>Instagram: @yourusername</p>
+      <p>Email: yourmail@example.com</p>
+      <p>You can replace these with your real details later.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made by Saksham | F1 Fan Website</p>
+  </footer>
+</body>
+</html>
